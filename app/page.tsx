@@ -6,37 +6,37 @@ import FormInput from "@/components/form-input";
 import FormButton from "@/components/form-btn";
 
 export default function Home() {
-  const [state, action] = useFormState(handleForm, null);
+  const [state, dispatch] = useFormState(handleForm, null);
 
   return (
     <div>
-      <form action={action} className="flex flex-col gap-4 w-[400px]">
+      <form action={dispatch} className="flex flex-col gap-4 w-[400px]">
         <FormInput
           name="email"
           type="email"
           placeholder="Email"
-          errors={[]}
           required
+          errors={state?.fieldErrors.email}
         />
         <FormInput
           name="username"
           type="text"
           placeholder="Username"
-          errors={[]}
           required
+          errors={state?.fieldErrors.username}
         />
         <FormInput
           name="password"
           type="password"
           placeholder="Password"
-          errors={state?.errors ?? []}
           required
+          errors={state?.fieldErrors.password}
         />
 
         <FormButton text="Log in" />
 
         {
-          state?.sucess &&
+          !state?.fieldErrors &&
           <div className="rounded-xl bg-green-500 p-3">Welcome back!</div>
         }
       </form>
