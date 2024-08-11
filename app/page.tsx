@@ -1,45 +1,18 @@
 "use client";
 
-import { useFormState } from "react-dom";
-import { handleForm } from "./actions";
-import FormInput from "@/components/form-input";
-import FormButton from "@/components/form-btn";
+import Link from "next/link";
 
 export default function Home() {
-  const [state, dispatch] = useFormState(handleForm, null);
 
   return (
-    <div>
-      <form action={dispatch} className="flex flex-col gap-4 w-[400px]">
-        <FormInput
-          name="email"
-          type="email"
-          placeholder="Email"
-          required
-          errors={state?.fieldErrors.email}
-        />
-        <FormInput
-          name="username"
-          type="text"
-          placeholder="Username"
-          required
-          errors={state?.fieldErrors.username}
-        />
-        <FormInput
-          name="password"
-          type="password"
-          placeholder="Password"
-          required
-          errors={state?.fieldErrors.password}
-        />
+    <div className="flex flex-col gap-3">
+      <h1 className="text-black font-bold text-3xl">Hello Stranger</h1>
 
-        <FormButton text="Log in" />
-
-        {
-          !state?.fieldErrors &&
-          <div className="rounded-xl bg-green-500 p-3">Welcome back!</div>
-        }
-      </form>
+      <div className="flex gap-2 justify-center">
+        <Link href="/log-in">Log In</Link>
+        <span className="text-blue-500">/</span>
+        <Link href="/create-account">Join Us</Link>
+      </div>
     </div>
   );
 }
