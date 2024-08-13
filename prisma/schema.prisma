@@ -14,7 +14,7 @@ model User {
   email      String   @unique
   bio        String?
   created_at DateTime @default(now())
-  updated_ad DateTime @updatedAt
+  updated_at DateTime @updatedAt
   Tweet      Tweet[]
   Like       Like[]
 }
@@ -25,7 +25,7 @@ model Tweet {
   user       User     @relation(fields: [userId], references: [id])
   userId     Int
   created_at DateTime @default(now())
-  updated_ad DateTime @updatedAt
+  updated_at DateTime @updatedAt
   Like       Like[]
 }
 

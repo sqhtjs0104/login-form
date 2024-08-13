@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-export default function Home() {
+export default function Hello() {
 
   return (
     <div className="flex flex-col gap-3">

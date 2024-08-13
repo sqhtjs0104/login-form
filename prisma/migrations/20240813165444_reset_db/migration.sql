@@ -4,9 +4,9 @@ CREATE TABLE "User" (
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "bio" TEXT NOT NULL,
+    "bio" TEXT,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_ad" DATETIME NOT NULL
+    "updated_at" DATETIME NOT NULL
 );
 
 -- CreateTable
@@ -15,7 +15,7 @@ CREATE TABLE "Tweet" (
     "tweet" TEXT NOT NULL,
     "userId" INTEGER NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_ad" DATETIME NOT NULL,
+    "updated_at" DATETIME NOT NULL,
     CONSTRAINT "Tweet_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
