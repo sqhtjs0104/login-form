@@ -1,5 +1,8 @@
+import AddTweet from "@/components/add-tweet";
+import Divider from "@/components/divider";
 import TweetList from "@/components/tweet-list";
 import db from "@/lib/db";
+import getSession from "@/lib/session";
 
 async function getInitialTweets() {
   const result = await db.tweet.findMany({
@@ -35,9 +38,12 @@ export interface ITweet {
 
 export default async function Home() {
   const initialTweets = await getInitialTweets();
+  const session = await getSession();
 
   return (
     <div>
+      <AddTweet userid={session.id} />
+      <Divider className="my-5" />
       <TweetList initialTweets={initialTweets} />
     </div>
   );
