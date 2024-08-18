@@ -3,6 +3,15 @@ import Divider from "@/components/divider";
 import TweetList from "@/components/tweet-list";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
+import { unstable_cache as nextCache } from "next/cache";
+
+const getCachedTweets = nextCache(
+  getInitialTweets,
+  ["main-tweets"],
+  {
+    revalidate: 60,
+  }
+);
 
 async function getInitialTweets() {
   const result = await db.tweet.findMany({
@@ -17,7 +26,7 @@ async function getInitialTweets() {
         }
       }
     },
-    take: 1,
+    take: 5,
     orderBy: {
       updated_at: "desc",
     }
@@ -36,8 +45,10 @@ export interface ITweet {
   };
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
-  const initialTweets = await getInitialTweets();
+  const initialTweets = await getCachedTweets();
   const session = await getSession();
 
   return (

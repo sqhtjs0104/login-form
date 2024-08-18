@@ -13,12 +13,18 @@ export default function TweetList({
   const [pageNum, setPageNum] = useState(1);
   const [tweets, setTweets] = useState(initialTweets);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLastPage, setIsLastPage] = useState(false);
+
   const onLoadMoreClick = async () => {
     setIsLoading(true);
-    const newTweets = await getMoreTweets(pageNum);
-    setTweets(prev => [...prev, ...newTweets]);
+    const newTweets = await getMoreTweets(pageNum * 1);
+    if (newTweets.length !== 0) {
+      setPageNum((prev) => prev + 1);
+      setTweets((prev) => [...prev, ...newTweets]);
+    } else {
+      setIsLastPage(true);
+    }
     setIsLoading(false);
-    setPageNum(prev => prev + 1);
   }
 
   return (
@@ -28,13 +34,17 @@ export default function TweetList({
           <Tweet key={tweet.id} tweet={tweet} />
         ))
       }
-      <button disabled={isLoading} onClick={onLoadMoreClick}>
-        {
-          isLoading
-            ? "Loading..."
-            : "Load more"
-        }
-      </button>
+      {
+        isLastPage || (
+          <button disabled={isLoading} onClick={onLoadMoreClick}>
+            {
+              isLoading
+                ? "Loading..."
+                : "Load more"
+            }
+          </button>
+        )
+      }
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { ITweet } from "@/app/(main)/page";
 import { formatDateTime } from "@/lib/util";
+import Link from "next/link";
 
 export default function Tweet({
   tweet
@@ -7,10 +8,10 @@ export default function Tweet({
   tweet: ITweet
 }) {
   return (
-    <div>
+    <Link href={`/tweets/${tweet.id}`} className="text-slate-600">
       <div>{tweet.user.username}</div>
       <div>{tweet.tweet}</div>
       <div>{formatDateTime(tweet.updated_at)}</div>
-    </div>
+    </Link>
   );
 }

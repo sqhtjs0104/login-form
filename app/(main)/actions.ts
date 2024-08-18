@@ -1,6 +1,7 @@
 "use server";
 
 import db from "@/lib/db";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 export async function getMoreTweets(page: number) {
@@ -16,8 +17,8 @@ export async function getMoreTweets(page: number) {
         }
       }
     },
-    skip: page,
-    take: 1,
+    skip: page * 5,
+    take: 5,
     orderBy: {
       updated_at: "desc",
     }
@@ -55,6 +56,6 @@ export async function addTweet(prevState: any, formData: FormData) {
       }
     });
 
-    console.log(newTweet);
+    revalidatePath("/");
   }
 }

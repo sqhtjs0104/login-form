@@ -4,9 +4,9 @@ import { addTweet } from "@/app/(main)/actions";
 import { useFormState, useFormStatus } from "react-dom";
 
 export default function AddTweet({
-  userid
+  userid,
 }: {
-  userid?: number
+  userid?: number;
 }) {
   const [state, action] = useFormState(addTweet, null);
   const { pending } = useFormStatus();
