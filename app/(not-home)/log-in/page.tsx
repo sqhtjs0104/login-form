@@ -21,12 +21,14 @@ export default function LogIn() {
           name="email"
           type="email"
           placeholder="Email"
+          errors={state?.fieldErrors.email}
           required
         />
         <FormInput
           name="password"
           type="password"
           placeholder="Password"
+          errors={state?.fieldErrors.password}
           required
         />
 

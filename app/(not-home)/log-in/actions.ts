@@ -54,6 +54,13 @@ export async function login(prevState: any, formData: FormData) {
         id: true,
       }
     });
+    if (!user) {
+      return {
+        fieldErrors: {
+          email: ["Can't find you"]
+        }
+      }
+    }
 
     const ok = await bcrypt.compare(result.data.password, user!.password ?? "");
     if (ok) {
