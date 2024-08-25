@@ -5,6 +5,7 @@ import LikeButton from "@/components/like-button";
 import getSession from "@/lib/session";
 import AddResponse from "@/components/add-response";
 import TweetsResponses from "@/components/tweets-responses";
+import Link from "next/link";
 
 export default async function DetailTweet({
   params,
@@ -16,13 +17,15 @@ export default async function DetailTweet({
 
   const session = await getSession();
   const tweet = await getTweetDetail(tweetId);
+  if (!tweet) notFound();
+
   const responses = await getCachedResponses(tweetId);
   const { likeCount, isLiked } = await getCachedLikeStatus(tweetId, session.id!);
 
   return (
     <div className="w-full p-10 flex flex-col gap-4">
       <div className="flex justify-between">
-        <span>{tweet?.user.username}</span>
+        <Link href={`/users/${tweet.user.username}`}>{tweet?.user.username}</Link>
         <span>{formatDateTime(tweet?.updated_at!)}</span>
       </div>
       <div>

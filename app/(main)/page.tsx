@@ -1,5 +1,6 @@
 import AddTweet from "@/components/add-tweet";
 import Divider from "@/components/divider";
+import SearchForm from "@/components/search-form";
 import TweetList from "@/components/tweet-list";
 import db from "@/lib/db";
 import getSession from "@/lib/session";
@@ -55,6 +56,7 @@ export default async function Home() {
     <div>
       <AddTweet userid={session.id} />
       <Divider className="my-5" />
+      <SearchForm />
       <TweetList initialTweets={initialTweets} />
     </div>
   );
