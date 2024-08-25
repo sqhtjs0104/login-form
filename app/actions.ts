@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import validator from "validator";
-import { USERNAME_MIN_LENGTH, PASSWORD_MIN_LENGTH, PASSWORD_REGEX } from "../../../lib/constants";
+import { USERNAME_MIN_LENGTH, PASSWORD_MIN_LENGTH, PASSWORD_REGEX } from "@/lib/constant";
 
 const checkEmail = (email: string) => {
   return (
